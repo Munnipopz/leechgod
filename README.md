@@ -1,20 +1,39 @@
-# ~~Telegram~~ Torrent / YouTube Leecher 🔥🤖
+## For Support join here [MoviezOnlySupport](https://telegram.dog/moviezonlysupport)
+## Working example group [Leech Here](https://telegram.dog/leechtorrentmoviesonly)
 
-A Telegram Torrent, youtube-dl Leecher, and rClone / Telegram Uploader!
+# Telegram Torrent Leecher 🔥🤖
 
-## installing
+### A Telegram Torrent (and youtube-dl) Leecher based on [Pyrogram](https://github.com/pyrogram/pyrogram)
 
-## You can also tap the Deploy To Heroku button below to deploy straight to Heroku!
+### This is a leech to FILE repo! Leech to STREAM(video) availabe here > [Patch-1](https://github.com/prgofficial/TorrentLeech-GDriVe/tree/patch-1)
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/TGExplore/PublicLeech/tree/master)
 
-### The Legacy Way
+# Benefits :-
+    ✓ Telegram File mirrorring to cloud along with its unzipping, unrar and untar
+    ✓ Drive/Teamdrive support/All other cloud services rclone.org supports
+    ✓ Unzip
+    ✓ Unrar
+    ✓ Untar
+    ✓ Custom file name
+    ✓ Custom commands
+
+### Credit goes to SpEcHiDe for his [Publicleech](https://github.com/SpEcHiDe/PublicLeech) repo & GautamKumar for his [repo](https://github.com/gautamajay52/TorrentLeech-Gdrive)
+
+
+## Installing
+
+### HEROKU SUPPORT REMOVED
+
+### IT's BETTER THAT WAY !!
+
+## The Legacy Way
+
 Simply clone the repository and run the main file:
 
 ```sh
 git clone https://github.com/SpEcHiDe/PublicLeech.git
 cd PublicLeech
-python3 -m venv venv
+virtualenv -p /usr/bin/python3 venv
 . ./venv/bin/activate
 pip install -r requirements.txt
 # <Create config.py appropriately>
@@ -26,91 +45,86 @@ python3 -m tobrot
 from tobrot.sample_config import Config
 
 class Config(Config):
-  TG_BOT_TOKEN = "123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11"
-  # These example values won't work. You must get your own app_id and
-  # api_hash from https://my.telegram.org, under API Development.
+  TG_BOT_TOKEN = ""
   APP_ID = 6
-  API_HASH = "eb06d4abfb49dc3eeb1aeb98ae0f581e"
-  # please read https://t.me/c/1279877202/74
-  # if you have not read the above README
-  AUTH_CHANNEL = [-1001234567890]
+  API_HASH = "7bcf61fcd32b8652cd5876b02dcf57ae"
+  AUTH_CHANNEL = --1001093703378
 ```
 
-### Variable Explanations
 
-##### Mandatory Variables
+### YOU NEED UNLIMITED TEAM/SHARE DRIVE IN ORDER TO USE THE GDRIVE FUNCIONS Flawlessly (normal GDRIVE has 15 gb of storage only)
 
-* `TG_BOT_TOKEN`: Create a bot using [@BotFather](https://telegram.dog/BotFather), and get the Telegram API token.
+##### Set Rclone
 
-* `APP_ID`
-* `API_HASH`: Get these two values from [my.telegram.org/apps](https://my.telegram.org/apps).
-  * N.B.: if Telegram is blocked by your ISP, try our [Telegram bot](https://telegram.dog/UseTGXBot) to get the IDs.
+1. Download Rclone from Here > [DOWNLOAD](https://rclone.org/downloads/)
+2. Extract the downloaded zip file and run cmd(hold shift and right click) from the Extracted folder.
+3. RUN rclone config and follow the onscreen instructions!
+4. If done Correctly, you'll get some thing like this in the cmd ;
 
-* `AUTH_CHANNEL`:
-Create a Super Group in Telegram, add `@GoogleIMGBot` to the group, and send /id in the chat, to get this value.
-You can add multiple IDs seperated by space.
+    type = drive
+    client_id = 55965362181-5105rlkk8dq8ej3iopmfc0.apps.googleusercontent.com
+    client_secret = VOqihw0cqXPCdDo7UR
+    scope = drive
+    token = {"access_token":"ya29.a0ASMA0zZmcJHRao_Et9YqPrSRq0hZBdVElo4TUIP_1R6DJx4vWzd-        00MbrlZdmH3sTRnOYhseTsEqKXcBfleu4yTfpeTJjAmaUCYkIsYuEsj608ncZEM3QZVnjnA7c7-    TeI","token_type":"Bearer","refresh_token":"1//0gOjRXzVHCgYIARAAGBASNwF-L9IrdBJRlXXUqUvOES7H4Ge3UDhy7mJLvJcROd9XQsI6e8zJsHQ88cw","expiry":"2020-07- 02T10:17:13.1076684+02:00"}
+    team_drive = 0AAHdpck9PVA 
 
-##### Optional Configuration Variables
+5. Copy these entries from CMD and paste it in ' RCLONE_CONFIG ' {heroku var}  - Don't try to copy paste the above string; It wont work 🤣.
 
-* `DOWNLOAD_LOCATION`
 
-* `MAX_FILE_SIZE`
+##### Set IndexURL
 
-* `TG_MAX_FILE_SIZE`
+1. Go to https://gdindex-code-builder.glitch.me/, and follow its instructions. Copy the code!
+2. Go to https://dash.cloudflare.com/c8bf985554bb03b455f683f8cafe25f2/workers/new and login/signup.
+3. Paste the code in script section. Then save and deploy.
+4. You'll get your GDIndex link.
+5. Add new key in HEROKU Vars - ' INDEX_LINK '  and add the above index link as value
 
-* `FREE_USER_MAX_FILE_SIZE`
+HOPE Everything will be working by now!
+For any support ping me here  >  [MoviezOnlySupport](https://telegram.dog/moviezonlysupport)
 
-* `MAX_TG_SPLIT_FILE_SIZE`
+## FAQ
 
-* `CHUNK_SIZE`
-
-* `MAX_MESSAGE_LENGTH`
-
-* `PROCESS_MAX_TIMEOUT`
-
-* `ARIA_TWO_STARTED_PORT`
-
-* `EDIT_SLEEP_TIME_OUT`
-
-* `MAX_TIME_TO_WAIT_FOR_TORRENTS_TO_START`
-
-* `FINISHED_PROGRESS_STR`
-
-* `UN_FINISHED_PROGRESS_STR`
-
-* `TG_OFFENSIVE_API`
-
-* `R_CLONE_CONF_URI`
-![a help, maybe](https://telegra.ph/file/073bcbc0b69b03d75ea04.jpg)
+* `INDEX_LINK`: (Without `/` at last of the link, otherwise u will get error) During creating index, plz fill `Default Root ID` with the id of your `DESTINATION_FOLDER` after creating. Otherwise index will not work properly.
 
 ## Available Commands
 
-* No Commands. 👉 BUTTONS better 👈
+* `/ytdl`: This command should be used as reply to a [supported link](https://ytdl-org.github.io/youtube-dl/supportedsites.html)
 
-## How to Use?
+* `/leech`: This command should be used as reply to a magnetic link, a torrent link, or a direct link. [this command will SPAM the chat and send the downloads a seperate files, if there is more than one file, in the specified torrent]
 
-* send any link, and click on the available buttons.
+* `/leech archive`: This command should be used as reply to a magnetic link, a torrent link, or a direct link. [This command will create a .tar.gz file of the output directory, and send the files in the chat, splited into PARTS of 1024MiB each, due to Telegram limitations]
 
-* if file is larger than 1500MB, [read this](https://t.me/c/1434259219/113).
+* `/gleech`: This command should be used as reply to a magnetic link, a torrent link, or a direct link. And this will download the files from the given link or torrent and will upload to the drive using rclone.
 
-* if file is a TAR archive, [read this](https://t.me/c/1434259219/104) to know how to uncompress.
+* `/gleech archive` This command will compress the folder/file and will upload to your google drive.
+
+* `/leech unzip`: This will unzip the .zip file and dupload to telegram.
+
+* `/gleech unzip`: This will unzip the .zip file and upload to drive.
+
+* `/leech unrar`: This will unrar the .rar file and dupload to telegram.
+
+* `/gleech unrar`: This will unrar the .rar file and upload to drive.
+
+* `/leech untar`: This will untar the .tar file and upload to telegram.
+
+* `/gleech untar`: This will untar the .tar file and upload to drive.
+
+* `/tleech`: This will mirror the telegram files to ur respective cloud drive.
+
+* `/tleech unzip`: This will unzip the .zip telegram file and upload to drive.
+
+* `/tleech unrar`: This will unrar the .rar telegram file and upload to drive.
+
+* `/tleech untar`: This will untar the .tar telegram file and upload to drive.
 
 
-## Issues or Feature Requests
 
-* For FeedBack and Suggestions, please feel free to say in [InFoTel Group](https://telegram.dog/InFoTelGroup)
-
-* search for known issues, [here](https://t.me/c/1434259219/118) or in the [GitHub Issues](https://github.com/SpEcHiDe/PublicLeech/issues).
-
-* add issues / feature requests, [here](https://github.com/SpEcHiDe/PublicLeech/issues/new).
 
 
 ## Credits, and Thanks to
-
 * [Dan Tès](https://telegram.dog/haskell) for his [Pyrogram Library](https://github.com/pyrogram/pyrogram)
 * [Robots](https://telegram.dog/Robots) for their [@UploadBot](https://telegram.dog/UploadBot)
 * [@AjeeshNair](https://telegram.dog/AjeeshNait) for his [torrent.ajee.sh](https://torrent.ajee.sh)
 * [@gotstc](https://telegram.dog/gotstc), @aryanvikash, [@HasibulKabir](https://telegram.dog/HasibulKabir) for their TORRENT groups
-* [rClone Team](https://github.com/rclone/rclone)
-* [gautamajay52](https://github.com/gautamajay52/TorrentLeech-Gdrive)
 * [![CopyLeft](https://telegra.ph/file/b514ed14d994557a724cb.jpg)](https://telegra.ph/file/fab1017e21c42a5c1e613.mp4 "CopyLeft Credit Video")
