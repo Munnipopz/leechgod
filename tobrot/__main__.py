@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# (c) Shrimadhav U K
+# (c) Shrimadhav U K | gautamajay52
 
 # the logging things
 import logging
@@ -13,35 +13,39 @@ logging.getLogger("urllib3").setLevel(logging.WARNING)
 LOGGER = logging.getLogger(__name__)
 
 import os
+import io
+import sys
+import traceback
 
 from tobrot import (
     DOWNLOAD_LOCATION,
     TG_BOT_TOKEN,
     APP_ID,
     API_HASH,
-    AUTH_CHANNEL
+    AUTH_CHANNEL,
+    LEECH_COMMAND,
+    YTDL_COMMAND,
+    GLEECH_COMMAND,
+    TELEGRAM_LEECH_COMMAND_G
 )
 
 from pyrogram import Client, Filters, MessageHandler, CallbackQueryHandler
 
 from tobrot.plugins.new_join_fn import new_join_f, help_message_f, rename_message_f
-from tobrot.plugins.incoming_message_fn import (
-    incoming_message_f,
-    incoming_youtube_dl_f,
-    incoming_purge_message_f
-)
+from tobrot.plugins.incoming_message_fn import incoming_message_f, incoming_youtube_dl_f, incoming_purge_message_f, incoming_gdrive_message_f
 from tobrot.plugins.status_message_fn import (
     status_message_f,
     cancel_message_f,
     exec_message_f,
     upload_document_f
+    #eval_message_f
 )
 from tobrot.plugins.call_back_button_handler import button
 from tobrot.plugins.custom_thumbnail import (
     save_thumb_nail,
     clear_thumb_nail
 )
-from tobrot.helper_funcs.custom_filters import message_fliter
+from tobrot.helper_funcs.download import down_load_media_f
 
 
 if __name__ == "__main__" :
@@ -54,17 +58,26 @@ if __name__ == "__main__" :
         bot_token=TG_BOT_TOKEN,
         api_id=APP_ID,
         api_hash=API_HASH,
-        workers=343,
-        workdir=DOWNLOAD_LOCATION
+        workers=343
     )
     #
-    app.set_parse_mode("html")
+    incoming_message_handler = MessageHandler(
+        incoming_message_f,
+        filters=Filters.command([f"{LEECH_COMMAND}"]) & Filters.chat(chats=AUTH_CHANNEL)
+    )
+    app.add_handler(incoming_message_handler)
     #
-    # incoming_message_handler = MessageHandler(
-    #     incoming_message_f,
-    #     filters=Filters.command(["leech"]) & Filters.chat(chats=AUTH_CHANNEL)
-    # )
-    # app.add_handler(incoming_message_handler)
+    incoming_gdrive_message_handler = MessageHandler(
+        incoming_gdrive_message_f,
+        filters=Filters.command([f"{GLEECH_COMMAND}"]) & Filters.chat(chats=AUTH_CHANNEL)
+    )
+    app.add_handler(incoming_gdrive_message_handler)
+    #
+    incoming_telegram_download_handler = MessageHandler(
+        down_load_media_f,
+        filters=Filters.command([f"{TELEGRAM_LEECH_COMMAND_G}"]) & Filters.chat(chats=AUTH_CHANNEL)
+    )
+    app.add_handler(incoming_telegram_download_handler)
     #
     incoming_purge_message_handler = MessageHandler(
         incoming_purge_message_f,
@@ -72,11 +85,11 @@ if __name__ == "__main__" :
     )
     app.add_handler(incoming_purge_message_handler)
     #
-    # incoming_youtube_dl_handler = MessageHandler(
-    #     incoming_youtube_dl_f,
-    #     filters=Filters.command(["ytdl"]) & Filters.chat(chats=AUTH_CHANNEL)
-    # )
-    # app.add_handler(incoming_youtube_dl_handler)
+    incoming_youtube_dl_handler = MessageHandler(
+        incoming_youtube_dl_f,
+        filters=Filters.command([f"{YTDL_COMMAND}"]) & Filters.chat(chats=AUTH_CHANNEL)
+    )
+    app.add_handler(incoming_youtube_dl_handler)
     #
     status_message_handler = MessageHandler(
         status_message_f,
@@ -95,6 +108,14 @@ if __name__ == "__main__" :
         filters=Filters.command(["exec"]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(exec_message_handler)
+    #
+    '''
+    eval_message_handler = MessageHandler(
+        eval_message_f,
+        filters=Filters.command(["eval"]) & Filters.chat(chats=AUTH_CHANNEL)
+    )
+    app.add_handler(eval_message_handler)
+    '''
     #
     rename_message_handler = MessageHandler(
         rename_message_f,
@@ -133,20 +154,14 @@ if __name__ == "__main__" :
     #
     save_thumb_nail_handler = MessageHandler(
         save_thumb_nail,
-        filters=Filters.command(["savethumbnail"]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=Filters.command(["savethumb"]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(save_thumb_nail_handler)
     #
     clear_thumb_nail_handler = MessageHandler(
         clear_thumb_nail,
-        filters=Filters.command(["clearthumbnail"]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=Filters.command(["delthumb"]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(clear_thumb_nail_handler)
-    # 
-    incoming_message_handler = MessageHandler(
-        incoming_message_f,
-        filters=message_fliter & Filters.chat(chats=AUTH_CHANNEL)
-    )
-    app.add_handler(incoming_message_handler)
     #
     app.run()
